@@ -1,15 +1,15 @@
 #!/bin/bash
 
-# X-UI සහ Xray Binary එක Download කර Run කිරීම
-cd /tmp
-wget https://github.com/vaxilu/x-ui/releases/latest/download/x-ui-linux-amd64.tar.gz
-tar zxvf x-ui-linux-amd64.tar.gz
-cd x-ui
-chmod +x x-ui bin/xray-linux-amd64
+# තාවකාලික ෆෝල්ඩරයක් සාදා ගැනීම
+mkdir -p /tmp/xui && cd /tmp/xui
 
-# Hugging Face Port එකට Configure කිරීම
+# X-UI ලිනක්ස් බයිනරි එක කෙලින්ම ඩවුන්ලෝඩ් කිරීම
+curl -sL https://github.com/vaxilu/x-ui/releases/latest/download/x-ui-linux-amd64.tar.gz -o x-ui.tar.gz
+tar -zxf x-ui.tar.gz
+cd x-ui
+
+# Hugging Face එකට ගැලපෙන සෙටින්ග්ස් සකස් කිරීම
 ./x-ui setting -username admin -password admin -port 7860
 
-# Panel එක සක්‍රීය කිරීම
-./x-ui start
-sleep infinity
+# සර්වර් එක සාර්ථකව foreground එකේ රන් කිරීම (starting ප්‍රශ්නය මඟහැරේ)
+exec ./x-ui
