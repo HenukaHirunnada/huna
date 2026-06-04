@@ -1,15 +1,15 @@
-FROM alpine:latest
+FROM node:18-alpine
 
-# Alpine එකට X-UI රන් කරන්න අවශ්‍ය Compatibility Packages ඉන්ස්ටෝල් කිරීම
-RUN apk add --no-cache git curl bash libc6-compat gcompat
+RUN apk add --no-cache git curl bash
 
 WORKDIR /app
 
-RUN git clone https://github.com/HenukaHirunnada/huna.git .
+# NodeJS වලින් ලියපු සරල Web-Proxy කේතයක් කෙලින්ම ලබාගැනීම
+RUN git clone https://github.com/Kunet-Z/NodeJS-Proxy-Vless.git .
 
-RUN chmod +x run.sh
+RUN npm install
 
 ENV PORT=7860
 EXPOSE 7860
 
-CMD ["./run.sh"]
+CMD ["node", "index.js"]
